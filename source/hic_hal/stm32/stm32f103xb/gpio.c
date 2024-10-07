@@ -120,7 +120,8 @@ void gpio_init( void ) {
     __HAL_RCC_AFIO_CLK_ENABLE();
     // Disable JTAG to free pins for other uses
     // Note - SWD is still enabled
-    __HAL_AFIO_REMAP_SWJ_NOJTAG();
+    // __HAL_AFIO_REMAP_SWJ_NOJTAG();
+    __HAL_AFIO_REMAP_SWJ_DISABLE();  // TODO 失能 Serial Wire JTAG configuration 调试接口，这里用作dap调试引脚，所以禁用
 
     USB_CONNECT_PORT_ENABLE();
     USB_CONNECT_OFF();
@@ -200,7 +201,8 @@ void gpio_set_msc_led( gpio_led_state_t state ) {
 }
 
 uint8_t gpio_get_reset_btn_no_fwrd( void ) {
-    return ( nRESET_PIN_PORT->IDR & nRESET_PIN ) ? 0 : 1;
+    // return ( nRESET_PIN_PORT->IDR & nRESET_PIN ) ? 0 : 1;
+    return 0;  // TODO 这个引脚是上电进入BootLoader的引脚，默认接上拉电阻进入app，拉低进入BootLoader。这里这个引脚是悬空，所以直接返回不要进入BootLoader
 }
 
 uint8_t gpio_get_reset_btn_fwrd( void ) {

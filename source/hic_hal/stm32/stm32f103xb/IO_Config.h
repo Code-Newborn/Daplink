@@ -46,25 +46,26 @@ COMPILER_ASSERT( DAPLINK_HIC_ID == DAPLINK_HIC_ID_STM32F103XB );
 #define POWER_EN_PIN      GPIO_PIN_15
 #define POWER_EN_Bit      15
 
-// nRESET OUT Pin
+// TODO nRESET OUT Pin 与待调试开发板的NRST连接，用于拖拽烧录
 #define nRESET_PIN_PORT GPIOB
 #define nRESET_PIN      GPIO_PIN_0
 #define nRESET_PIN_Bit  0
 
-// SWD
-#define SWCLK_TCK_PIN_PORT GPIOB
-#define SWCLK_TCK_PIN      GPIO_PIN_13
-#define SWCLK_TCK_PIN_Bit  13
+// TODO SWD 调试接口SWD引脚
+#define SWCLK_TCK_PIN_PORT GPIOA
+#define SWCLK_TCK_PIN      GPIO_PIN_14
+#define SWCLK_TCK_PIN_Bit  14
 
-#define SWDIO_OUT_PIN_PORT GPIOB
-#define SWDIO_OUT_PIN      GPIO_PIN_14
-#define SWDIO_OUT_PIN_Bit  14
+#define SWDIO_OUT_PIN_PORT GPIOA
+#define SWDIO_OUT_PIN      GPIO_PIN_13
+#define SWDIO_OUT_PIN_Bit  13
 
+// 省略未用上
 #define SWDIO_IN_PIN_PORT GPIOB
 #define SWDIO_IN_PIN      GPIO_PIN_12
 #define SWDIO_IN_PIN_Bit  12
 
-// LEDs
+// TODO LEDs 用户控制LED
 // USB status LED
 #define RUNNING_LED_PORT GPIOA
 #define RUNNING_LED_PIN  GPIO_PIN_9

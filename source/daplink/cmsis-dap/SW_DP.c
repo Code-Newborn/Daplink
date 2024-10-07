@@ -48,18 +48,23 @@
     PIN_SWCLK_SET();     \
     PIN_DELAY()
 
-#define SW_WRITE_BIT( bit ) \
-    PIN_SWDIO_OUT( bit );   \
-    PIN_SWCLK_CLR();        \
-    PIN_DELAY();            \
-    PIN_SWCLK_SET();        \
+// TODO SWD调试用到  swclk_out, swdio_in, swdio_out
+// swdio_in就是100R电阻接到swdio_out, 为了节省一个引脚, 所以直接读取swdio_out
+
+#define SW_WRITE_BIT( bit )                                \
+    pin_out_init( SWDIO_OUT_PIN_PORT, SWDIO_OUT_PIN_Bit ); \
+    PIN_SWDIO_OUT( bit );                                  \
+    PIN_SWCLK_CLR();                                       \
+    PIN_DELAY();                                           \
+    PIN_SWCLK_SET();                                       \
     PIN_DELAY()
 
-#define SW_READ_BIT( bit ) \
-    PIN_SWCLK_CLR();       \
-    PIN_DELAY();           \
-    bit = PIN_SWDIO_IN();  \
-    PIN_SWCLK_SET();       \
+#define SW_READ_BIT( bit )                                       \
+    PIN_SWCLK_CLR();                                             \
+    PIN_DELAY();                                                 \
+    pin_in_init( SWDIO_OUT_PIN_PORT, SWDIO_OUT_PIN_Bit, 1 );     \
+    bit = HAL_GPIO_ReadPin( SWDIO_OUT_PIN_PORT, SWDIO_OUT_PIN ); \
+    PIN_SWCLK_SET();                                             \
     PIN_DELAY()
 
 #define PIN_DELAY() PIN_DELAY_SLOW( DAP_Data.clock_delay )
