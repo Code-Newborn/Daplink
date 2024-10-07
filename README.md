@@ -1,3 +1,25 @@
+### DIY DapLink
+
+编译Daplink源码获得对应硬件的固件，并进行烧录测试：
+
+引脚说明：
+
+用户控制LED：
+
+- PA9 → LED_DAP
+
+DapLink连接烧录：
+
+- PA13 → SWDIO
+- PA14 → SWCLK
+
+U盘拖拽烧录：
+
+- PB0 → nRESET OUT Pin
+
+**下面是官方源码介绍**
+
+------
 
 [![DAPLink](/docs/images/daplink-website-logo-link.png)](https://daplink.io/)
 
