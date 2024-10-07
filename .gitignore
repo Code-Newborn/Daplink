@@ -41,7 +41,7 @@ tmp/
 
 *.axf
 *.S19
-*.bin
+# *.bin 保留
 *.hex
 *.dep
 *.FLM
