@@ -1,21 +1,26 @@
 ### DIY DapLink
 
-编译Daplink源码获得对应硬件的固件，并进行烧录测试：
+1. 编译Daplink源码获得对应硬件的Bootloader程序和Application程序（stm32f103xb_bl.hex和stm32f103xb_stm32f103rb_if.hex），通过`J-Flash V8.10`软件可以将两个hex文件合并输出为bin文件
+2. Daplink调试器引脚分配说明
 
-引脚说明：
+| stm32f103c8t6芯片引脚 | DapLink调试器分配功能 | 备注                    | 所在文件                                       |
+| --------------------- | --------------------- | ----------------------- | ---------------------------------------------- |
+| PA9                   | LED_DAP               | 指示LED                 | .\source\hic_hal\stm32\stm32f103xb\IO_Config.h |
+| PA13                  | SWDIO                 | SWD烧录                 | .\source\hic_hal\stm32\stm32f103xb\IO_Config.h |
+| PA14                  | SWCLK                 | SWD烧录                 | .\source\hic_hal\stm32\stm32f103xb\IO_Config.h |
+| PB0                   | nRESET_PIN            | 输出复位信号（U盘烧录） | .\source\hic_hal\stm32\stm32f103xb\IO_Config.h |
 
-用户控制LED：
+3. 为DapLink调试器烧录固件bin（使用`STM32 ST-LINK Utility`软件和`st-link`调试器）：
 
-- PA9 → LED_DAP
+&emsp;&emsp;**Connect to the target**连接到DapLink调试器，打开**Binary file**，点击**program verify**进行固件烧录，至此完成Daplink调试器制作，可以用于其他开发板的调试工作。
 
-DapLink连接烧录：
+4. 擦除DapLink调试器固件，恢复成开发板（使用`STM32 ST-LINK Utility`软件和`st-link`调试器）：
 
-- PA13 → SWDIO
-- PA14 → SWCLK
+&emsp;&emsp;**Target→Settings→Mode: Connect under reset **设置复位模式下可以连接已烧录bin固件的板子，按下reset点击connect，松开后连接成功，点击**Full chip erase**可用于擦除固件。
 
-U盘拖拽烧录：
+​	或者采用另外一种方式将其恢复正常的开发板，就需要`boot0`跳线帽接3.3V上电，进行下载正常开发板程序，还原跳线帽就可以了
 
-- PB0 → nRESET OUT Pin
+
 
 **下面是官方源码介绍**
 
